@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动整理</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">整</div>
+          <div>
+            <strong>自动整理</strong>
+            <span>客户档案工作台</span>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="主导航">
+          <button class="nav-item active" data-view="dashboard"><span>⌂</span>总览</button>
+          <button class="nav-item" data-view="documents"><span>▤</span>材料索引</button>
+          <button class="nav-item" data-view="customers"><span>◎</span>客户分组</button>
+          <button class="nav-item" data-view="reports"><span>↗</span>统计报表</button>
+          <button class="nav-item" data-view="settings"><span>⚙</span>本地设置</button>
+        </nav>
+
+        <div class="privacy-card">
+          <span class="status-dot"></span>
+          <div><strong>本地处理</strong><small>原文件只读，不上传外部 AI</small></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">LOCAL DOCUMENT INTELLIGENCE</p>
+            <h1 id="page-title">档案总览</h1>
+            <p id="page-subtitle">识别、分组并排好每一份客户材料</p>
+          </div>
+          <div class="top-actions">
+            <button class="button ghost" id="import-url">抓取网页</button>
+            <button class="button secondary" id="import-folder">导入文件夹</button>
+            <button class="button primary" id="import-files">导入材料</button>
+          </div>
+        </header>
+
+        <section id="view" class="view" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <dialog id="url-dialog">
+      <form method="dialog" class="dialog-card" id="url-form">
+        <div class="dialog-heading">
+          <div><span class="dialog-icon">↗</span></div>
+          <div><h2>抓取网页材料</h2><p>网页会被下载后在本机识别，不发送给外部 AI。</p></div>
+        </div>
+        <label for="url-input">网页链接</label>
+        <input id="url-input" type="url" placeholder="https://example.com/document" required autocomplete="off">
+        <div class="dialog-actions">
+          <button class="button ghost" value="cancel">取消</button>
+          <button class="button primary" value="default" id="url-submit">开始识别</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="working" class="working hidden" role="status">
+      <div class="working-card">
+        <div class="spinner"></div>
+        <strong id="working-title">正在整理材料…</strong>
+        <span id="working-detail">正在读取文档内容</span>
+      </div>
+    </div>
+    <div id="toast" class="toast hidden" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
