@@ -1,0 +1,13 @@
+node_modules/
+dist/
+release/
+coverage/
+*.log
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+Thumbs.db
+.env
+work/
+outputs/

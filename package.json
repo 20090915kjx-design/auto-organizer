@@ -1,0 +1,58 @@
+{
+  "name": "auto-organizer",
+  "version": "0.1.0",
+  "description": "完全本地运行的 Windows 客户档案自动整理工具",
+  "main": "src/main.js",
+  "author": "Auto Organizer contributors",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer/app.js",
+    "dist": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "@mozilla/readability": "0.6.0",
+    "@tesseract.js-data/chi_sim": "1.0.0",
+    "@tesseract.js-data/eng": "1.0.0",
+    "exceljs": "4.4.0",
+    "jsdom": "30.0.1",
+    "mammoth": "1.12.1",
+    "pdf-parse": "2.4.5",
+    "tesseract.js": "7.0.0"
+  },
+  "devDependencies": {
+    "electron": "43.4.0",
+    "electron-builder": "26.15.3"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
+  },
+  "build": {
+    "appId": "cn.autoorganizer.desktop",
+    "productName": "自动整理",
+    "asar": true,
+    "files": [
+      "src/**/*",
+      "package.json",
+      "README.md",
+      "PRIVACY.md",
+      "LICENSE"
+    ],
+    "asarUnpack": [
+      "node_modules/tesseract.js-core/**/*",
+      "node_modules/@tesseract.js-data/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "artifactName": "AutoOrganizer-${version}-Setup.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "自动整理"
+    }
+  }
+}
